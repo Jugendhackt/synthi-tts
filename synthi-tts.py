@@ -17,7 +17,7 @@ else:
 
 process = Popen(['espeak', '-q', '-x', '"' + text + '"'], stdout=PIPE, stderr=PIPE)
 stdout, stderr = process.communicate()
-phonetic = stdout.decode('utf-8').strip()[5:]
+phonetic = stdout.decode('utf-8').strip()[5:].replace("'", "")
 #print(phonetic)
 
 # create map from espeak-gentle translation
@@ -70,5 +70,6 @@ try:
     os.remove("output.mp3")
 except OSError:
     pass
-os.system(command)
 
+if os.system(command) == 0:
+    print("file written to output.mp3")
