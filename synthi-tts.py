@@ -25,7 +25,7 @@ phonetic = stdout.decode('utf-8').strip()[5:]
 #print(phonetic)
 
 # create e_map from espeak-gentle translation
-e_e_map = {}
+e_map = {}
 
 with open("espeak-to-gentle", encoding="utf-8") as f:
     for line in f.readlines():
