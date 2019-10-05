@@ -13,7 +13,7 @@ command = "time echo '"
 for word in args.text:
     command = command + word + " "
 command = command[:-1]
-command = command + "' | python3 ipa-to-files.py | python3 ffmpeg-concentenate-provided.py"
+command = command + "' | python3 ipa-to-files.py | python3 ffmpeg-concatenate-provided.py"
 
 os.system(command)
 print(command)
