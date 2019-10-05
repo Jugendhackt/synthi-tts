@@ -30,7 +30,10 @@ for word in data['words']:
             phone_offset = phone_offset;
         command = command + ".mp3 -vn -acodec copy -ss " + seconds_to_ffmpeg_format(phone_offset)
         command = command + " -t " + seconds_to_ffmpeg_format(word['phones'][i]['duration'])
-        command = command + " " + str(jsonfile.replace("-data.json", "")) + "/" + word['phones'][i]['phone'] + ".mp3"
-        command = command + " -y -loglevel panic"
+        command = command + " " + str(jsonfile.replace("-data.json", "")) + "/" + word['phones'][i]['phone'].replace("_B","").replace("_I","").replace("_E","") + ".mp3"
+        if "_I" in word['phones'][i]['phone']:
+            command = command + " -loglevel panic"
+        else:
+            command = command + " -y -loglevel panic"
         print(command)
         os.system(command)
