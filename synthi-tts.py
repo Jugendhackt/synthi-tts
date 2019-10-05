@@ -15,14 +15,13 @@ parser.add_argument('--silence_missing_phonemes', dest='missing_phonemes_print',
 
 # Getting folder and files from CLI
 args = parser.parse_args()
-text = ""
-for word in args.text:
-    text += " " + word
-text = text[1:]
+text = ' '.join(args.text)
+print(text)
 # Getting language from espeak
-process = Popen(['espeak', '-q', '-x', '"' + text + '" -v ' + args.language.lower()], stdout=PIPE, stderr=PIPE)
+process = Popen(['espeak', '-q', '-x', '"' + text + '"', '-v', args.language.lower()], stdout=PIPE, stderr=PIPE)
 stdout, stderr = process.communicate()
 phonetic = stdout.decode('utf-8').strip()[5:].replace("'", "").replace("_:", "")
+print(phonetic)
 
 # create e_map from espeak-gentle translation
 e_map = {}
@@ -31,7 +30,7 @@ with open("espeak-to-gentle", encoding="utf-8") as f:
     for line in f.readlines():
         ephon, gphon = line.split("=")
         gphon = gphon.split(" ")
-        audio = [(args.folder + '/' + a.strip() + ".mp3") for a in gphon]
+        audio = [(str(args.folder) + '/' + a.strip() + ".mp3") for a in gphon]
         e_map[ephon] = audio
 
 
