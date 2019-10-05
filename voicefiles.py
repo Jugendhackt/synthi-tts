@@ -20,7 +20,7 @@ with open("espeak-to-gentle", encoding="utf-8") as f:
     for line in f.readlines():
         phon, audio = line.split("=")
         audio = audio.split(" ")
-        audio = [("ccc/" + a.strip() + ".mp3") for a in audio]
+        audio = [("everything/" + a.strip() + ".mp3") for a in audio]
         if len(phon) and not phon in map:
             map[phon] = audio
 
