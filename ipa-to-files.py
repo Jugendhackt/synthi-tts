@@ -11,20 +11,21 @@ map = {}
 
 with open("audiosamples-1/map", encoding="utf-8") as f:
     for line in f.readlines():
-        phon, audio = line.strip().split(":")
-        audio = "audiosamples-1/" + audio
-        if phon and not phon in map:
+        phon, audio = line.split(":")
+        audio = "audiosamples-1/" + audio.strip()
+        if len(phon) and not phon in map:
             map[phon] = audio
 
 #print(map)
 files = []
 
 for phon in ipa:
-    if phon.strip():
-        if phon in map:
-            #print(phon + ":" + map[phon])
-            files.append(map[phon])
-        else:
-            print(phon + ": not found", file=sys.stderr)
+    #if phon.strip():
+    #print('char: "'+phon+'"')
+    if phon in map:
+        #print(phon + ":" + map[phon])
+        files.append(map[phon])
+    else:
+        print(phon + ": not found", file=sys.stderr)
 
 print(' '.join(files))
