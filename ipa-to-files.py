@@ -17,10 +17,14 @@ with open("audiosamples-1/map", encoding="utf-8") as f:
             map[phon] = audio
 
 #print(map)
+files = []
 
 for phon in ipa:
     if phon.strip():
         if phon in map:
-            print(phon + ":" + map[phon])
-        else:
-            print(phon + ":" + "----------")
+            #print(phon + ":" + map[phon])
+            files.append(map[phon])
+        #else:
+            #print(phon + ":" + "----------")
+
+print(' '.join(files))
