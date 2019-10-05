@@ -24,9 +24,12 @@ command = command + " -filter_complex '"
 
 for i in range(len(files)):
     command = command + "["+str(i)+":0]"
-command = command + "concat=n="+str(len(files))+":v=0:a=1[out]' -map [out] output.mp3"
+command = command + "concat=n="+str(len(files))+":v=0:a=1[out]' -map [out] -loglevel panic output.mp3"
 
-os.remove("output.mp3")
+try:
+    os.remove("output.mp3")
+except OSError:
+    pass
 os.system(command)
 
 print(command)
