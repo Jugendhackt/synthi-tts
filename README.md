@@ -6,26 +6,29 @@ Deine Stimme digitalisieren und für dich sprechen lassen!
 
 ### Daten sammeln
 
-- Audio einsprechen
-- Audio traskribieren
+- Audio einsprechen  [audio.mp3]
+- Audio traskribieren [plain text - transcription.txt]
 - mit Force Aligner (gentle) Audio + Transkript zu Timecodes matchen
 - Audiosample zerschnipseln (ffmpeg)
 
+```bash
+# prepare audio.mp3 and transcription.txt
+# you need docker pre-installed
+# this will generate an output.json inside the path specified.
+./gentle-docker.sh [folder] [audio.mp3] [transcription.txt]
+python3 json-times-voice-to-samples.py [folder/output.json]
+```
+
 ### Text to speech
 
-- [Audiodatenbank]
+- [Audiodatenbank vom vorherigen Schritt]
 - Text eingeben
 - in IPA-Lautsprache wandeln (espeak)
 - Audiosamples danach zusammenfügen (ffmpeg)
 
-
-### How to use
-
-- python3 ipa-to-files.py "hier den Text, der in Sprache umgesetzt werden soll" | python3 ffmpeg-concentenate-provided.py
-
-Aligning speech with transcript:
-
-- ./gentle-docker.sh /full/path/to/folder/containing/audio/and/transcripts audiofile transcriptfile
-
-This will generate an output.json inside the path specified.
+```bash
+# make sure that voice model is complete
+# only english is viable
+python3 synthi-tts.py "Your text here"
+```
 

@@ -3,13 +3,17 @@
 from subprocess import Popen, PIPE
 import sys
 import os
-import fileinput
 
+folder = ""
 text = ""
-if len(sys.argv) > 1:
-    text = sys.argv[1]
+if len(sys.argv) > 2:
+    folder = sys.argv[1]
+    if not folder.endswith("/"):
+        folder = folder + "/"
+    text = sys.argv[2]
 else:
-    text = fileinput.input()[0].strip()
+    print('usage: python3 synthi-tts.py <voice sample folder> "<text>"', file=sys.stderr)
+    sys.exit()
 
 process = Popen(['espeak', '-q', '-x', '"' + text + '"'], stdout=PIPE, stderr=PIPE)
 stdout, stderr = process.communicate()
@@ -23,11 +27,11 @@ with open("espeak-to-gentle", encoding="utf-8") as f:
     for line in f.readlines():
         phon, audio = line.split("=")
         audio = audio.split(" ")
-        audio = [("everything/" + a.strip() + ".mp3") for a in audio]
+        audio = [(folder + a.strip() + ".mp3") for a in audio]
         if len(phon) and not phon in map:
             map[phon] = audio
 
-#map[" "] = ["silence.mp3"]
+map[" "] = ["silence.mp3"]
 #print(map)
 
 
