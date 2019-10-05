@@ -19,7 +19,6 @@ command = "ffmpeg"
 
 for file in files:
     command = command + " -i " + file
-
 command = command + " -filter_complex '"
 
 for i in range(len(files)):
