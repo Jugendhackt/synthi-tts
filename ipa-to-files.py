@@ -24,7 +24,7 @@ for phon in ipa:
         if phon in map:
             #print(phon + ":" + map[phon])
             files.append(map[phon])
-        #else:
-            #print(phon + ":" + "----------")
+        else:
+            print(phon + ": not found", file=sys.stderr)
 
 print(' '.join(files))
