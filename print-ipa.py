@@ -11,4 +11,7 @@ else:
 
 process = Popen(['espeak', '-q', '--ipa', '"' + text + '"'], stdout=PIPE, stderr=PIPE)
 stdout, stderr = process.communicate()
-print(stdout.decode('utf-8').strip())
+ipa = stdout.decode('utf-8').strip()
+print(ipa)
+print(ipa, file=sys.stderr)
+
