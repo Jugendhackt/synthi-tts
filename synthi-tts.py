@@ -22,11 +22,7 @@ text = text[1:]
 # Getting language from espeak
 process = Popen(['espeak', '-q', '-x', '"' + text + '" -v ' + args.language.lower()], stdout=PIPE, stderr=PIPE)
 stdout, stderr = process.communicate()
-<<<<<<< HEAD
-phonetic = stdout.decode('utf-8').striparsetparsetp()[5:]
-=======
 phonetic = stdout.decode('utf-8').strip()[5:].replace("'", "")
->>>>>>> 49617ec77093fdb30115ecf7ee0e8c9554a3ed14
 #print(phonetic)
 
 # create e_map from espeak-gentle translation
@@ -34,18 +30,10 @@ e_map = {}
 
 with open("espeak-to-gentle", encoding="utf-8") as f:
     for line in f.readlines():
-<<<<<<< HEAD
-        phon, audio = line.split("=")
-        audio = audio.split(" ")
-        audio = [(args.folder + '/' + a.strip() + ".mp3") for a in audio]
-        if len(phon) and not phon in e_map:
-            e_map[phon] = audio
-=======
         ephon, gphon = line.split("=")
         gphon = gphon.split(" ")
-        audio = [(folder + a.strip() + ".mp3") for a in gphon]
+        audio = [(args.folder + '/' + a.strip() + ".mp3") for a in gphon]
         e_map[ephon] = audio
->>>>>>> 49617ec77093fdb30115ecf7ee0e8c9554a3ed14
 
 
 e_map[" "] = ["silence.mp3"]
