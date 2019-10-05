@@ -78,3 +78,4 @@ os.system(command)
 
 if os.system(command) == 0:
     print("file written to output.mp3")
+    # iterating through espeak string
