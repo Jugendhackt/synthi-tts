@@ -9,7 +9,7 @@ if len(sys.argv) > 1:
 else:
     ipa = fileinput.input()[0].strip()
 
-print(ipa)
+ipa = ipa.split(" ")
 
 files = []
 for file in ipa:
@@ -26,5 +26,7 @@ for i in range(len(files)):
     command = command + "["+str(i)+":0]"
 command = command + "concat=n="+str(len(files))+":v=0:a=1[out]' -map [out] output.mp3"
 
+os.remove("output.mp3")
 os.system(command)
 
+print(command)
