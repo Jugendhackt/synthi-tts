@@ -1,0 +1,19 @@
+#!/usr/bin/python3
+
+import argparse
+import os
+
+parser = argparse.ArgumentParser(description='I really have no idea what to write here')
+parser.add_argument('text', metavar='TEXT', type=str, nargs='+',
+                   help='the string that has to be transformed into voicepack')
+
+args = parser.parse_args()
+
+command = "time echo '"
+for word in args.text:
+    command = command + word + " "
+command = command[:-1]
+command = command + "' | python3 ipa-to-files.py | python3 ffmpeg-concentenate-provided.py"
+
+os.system(command)
+print(command)
