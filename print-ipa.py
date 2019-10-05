@@ -1,6 +1,14 @@
 from subprocess import Popen, PIPE
 import sys
+import fileinput
 
-process = Popen(['espeak', '-q', '--ipa', '"' + ' '.join(sys.argv[1:]) + '"'], stdout=PIPE, stderr=PIPE)
+text = ""
+if len(sys.argv) > 1:
+    text = sys.argv[1]
+else:
+    text = fileinput.input()[0].strip()
+
+
+process = Popen(['espeak', '-q', '--ipa', '"' + text + '"'], stdout=PIPE, stderr=PIPE)
 stdout, stderr = process.communicate()
 print(stdout.decode('utf-8').strip())
