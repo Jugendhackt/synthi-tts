@@ -1,20 +1,13 @@
 import os
+import sys
 import subprocess
-import argparse
 import fileinput
 
-parser = argparse.ArgumentParser(description='concentenate all provided files together.\nonly supports mp3 currently')
-
-parser.add_argument('files', metavar='V', type=str, nargs='+')
-
-args = parser.parse_args()
-
 ipa = ""
-if len(args.files) != 0:
-    ipa = args.files
+if len(sys.argv) > 1:
+    ipa = sys.argv[1]
 else:
     ipa = fileinput.input()[0].strip()
-    ipa = ipa.split(" ")
 
 print(ipa)
 
@@ -35,4 +28,3 @@ command = command + "concat=n="+str(len(files))+":v=0:a=1[out]' -map [out] outpu
 
 os.system(command)
 
-print(args.files)
