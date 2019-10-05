@@ -21,8 +21,7 @@ else:
 # Getting language from espeak
 process = Popen(['espeak', '-q', '-x', '"' + text + '"'], stdout=PIPE, stderr=PIPE)
 stdout, stderr = process.communicate()
-phonetic = stdout.decode('utf-8').strip()[5:].replace("'", "")
-#print(phonetic)
+phonetic = stdout.decode('utf-8').strip()[5:].replace("'", "").replace("_:", "")
 
 # create e_map from espeak-gentle translation
 e_map = {}
