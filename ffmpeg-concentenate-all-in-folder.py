@@ -5,7 +5,6 @@ path = os.path.dirname(os.path.realpath(__file__))
 path = path + "/"
 
 files = []
-# r=root, d=directories, f = files
 for r, d, f in os.walk(path):
     for file in f:
         if '.mp3' in file and "output.mp3" not in file:

@@ -28,5 +28,3 @@ command = command + "concat=n="+str(len(files))+":v=0:a=1[out]' -map [out] outpu
 
 os.remove("output.mp3")
 os.system(command)
-
-print(command)
