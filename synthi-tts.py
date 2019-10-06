@@ -10,7 +10,7 @@ parser = argparse.ArgumentParser("synthi-tts <text>")
 parser.add_argument('text', metavar='<text>', type=str, nargs='*', help='the text the program has to pronounce.')
 parser.add_argument('-f', dest='folder', action='store', help='the folder from which the program loads the phonemes.')
 parser.add_argument('-l', dest='language', action='store', default='english', help='the language the program uses to determine the pronounciation.\nDefault: english')
-parser.add_argument('--silence_missing_phonemes', dest='missing_phonemes_print', action='store_true', default=False, help="use this flag if you don't want to see messages telling you which parts of the phenatics the program does'nt know.")
+parser.add_argument('--no_warnings', dest='missing_phonemes_print', action='store_true', default=False, help="use this flag if you don't want to see messages telling you which parts of the phenatics the program does'nt know.")
 
 
 # Getting folder and files from CLI
@@ -77,5 +77,5 @@ command = command + "concat=n="+str(len(files))+":v=0:a=1[out]' -map [out] -y -l
 os.system(command)
 
 if os.system(command) == 0:
-    print("file written to output.mp3")
+    print("file successfully written to output.mp3")
     # iterating through espeak string
