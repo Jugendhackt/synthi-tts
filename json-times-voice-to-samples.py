@@ -41,14 +41,8 @@ for word in data['words']:
 
                 # Continue assembly of command
                 # Beginning
-                command = command + ".mp3 -vn -acodec copy -ss " + seconds_to_ffmpeg_format(phone_offset)
-
-                # How long?
-                if word['phones'][i]['duration'] > 0.06:
-                    command = command + " -t " + seconds_to_ffmpeg_format(word['phones'][i]['duration'])
-                else:
-                    # Minimal duration of 0.06s because of ffmpeg limitation
-                    command = command + " -t " + seconds_to_ffmpeg_format(0.06)
+                command = command + ".mp3 -vn -acodec mp3 -ss " + seconds_to_ffmpeg_format(phone_offset)
+                command = command + " -t " + seconds_to_ffmpeg_format(word['phones'][i]['duration'])
                 
                 # Adding name of the phoneme extract
                 command = command + " " + str(jsonfile.replace(".json", "")) + "/" + word['phones'][i]['phone'].replace("_B","").replace("_I","").replace("_E","") + ".mp3"
