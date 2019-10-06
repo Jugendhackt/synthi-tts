@@ -23,6 +23,31 @@ except FileExistsError:
     #the folder already existsif not jsonfile.endswith("json"):
     pass
 
+#decide which phoneme to use
+# Loop through each word of the transcript
+phoneme_map = {}
+for word in data['words']:
+    # Word has to be in the audio file
+    if word['case'] != "not-found-in-audio":
+        # Iterates phonemes
+        for i in range(len(word["phones"])):
+            try:
+                phoneme_map[word['phones'][i]['phone']].append(word['phones'][i]['duration'])
+            except KeyError:
+                phoneme_map[word['phones'][i]['phone']] = [word['phones'][i]['duration']]
+
+ #iterates over the phonomes, and replaces the list of all durations with the average duration               
+for phonome in phoneme_map:
+    sum_of_all_durations = 0
+    print(phonome)
+    for value in phoneme_map[phonome]:
+        sum_of_all_durations += float(value)
+    average = sum_of_all_durations / len(phoneme_map[phonome])
+    phoneme_map[phonome] = average
+
+print(phoneme_map)
+
+
 # Loop through each word of the transcript
 for word in data['words']:
     # Word has to be in the audio file
