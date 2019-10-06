@@ -17,8 +17,8 @@ Deine Stimme digitalisieren und für dich sprechen lassen!
 # prepare audio.mp3 and transcription.txt
 # you need docker pre-installed
 # this will generate an output.json inside the path specified.
-./gentle-docker.sh [folder] [audio.mp3] [transcription.txt]
-python3 json-times-voice-to-samples.py [folder/output.json]
+./gentle-docker.sh <folder> <audio.mp3> <transcription.txt>
+python3 json-times-voice-to-samples.py <folder/output.json> [output-folder]
 ```
 
 ### Text to speech
@@ -30,7 +30,7 @@ python3 json-times-voice-to-samples.py [folder/output.json]
 
 ```bash
 # make sure that voice model is complete
-# only english is viable
-python3 synthi-tts.py "Your text here"
+# English is recommended
+python3 synthi-tts.py "Your text here" -f <output-folder>
 ```
 
