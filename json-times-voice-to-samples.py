@@ -17,6 +17,12 @@ if not jsonfile.endswith("json"):
 with open(jsonfile) as json_file:
     data = json.load(json_file)
 
+try:
+    os.mkdir(jsonfile.replace('.json',''))
+except FileExistsError:
+    #the folder already exists
+    pass
+
 # Loop through each word of the transcript
 for word in data['words']:
     # Word has to be in the audio file
