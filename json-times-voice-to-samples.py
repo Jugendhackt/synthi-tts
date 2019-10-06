@@ -20,7 +20,7 @@ with open(jsonfile) as json_file:
 try:
     os.mkdir(jsonfile.replace('.json',''))
 except FileExistsError:
-    #the folder already exists
+    #the folder already existsif not jsonfile.endswith("json"):
     pass
 
 # Loop through each word of the transcript
