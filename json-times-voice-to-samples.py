@@ -39,13 +39,10 @@ for word in data['words']:
  #iterates over the phonomes, and replaces the list of all durations with the average duration               
 for phonome in phoneme_map:
     sum_of_all_durations = 0
-    print(phonome)
     for value in phoneme_map[phonome]:
         sum_of_all_durations += float(value)
     average = sum_of_all_durations / len(phoneme_map[phonome])
     phoneme_map[phonome] = average
-
-print(phoneme_map)
 
 
 # Loop through each word of the transcript
