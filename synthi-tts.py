@@ -30,8 +30,14 @@ with open("espeak-to-gentle", encoding="utf-8") as f:
     for line in f.readlines():
         ephon, gphon = line.split("=")
         gphon = gphon.split(" ")
-        audio = [(str(args.folder) + '/' + a.strip() + ".mp3") for a in gphon]
-        e_map[ephon] = audio
+        audiofiles = [(str(args.folder) + '/' + a.strip() + ".mp3") for a in gphon]
+        for audiofile in audiofiles:
+            if not os.path.exists(audiofile):
+                audiofiles.remove(audiofile)
+                if not args.missing_phonemes_print:
+                    print("phoneme " + ephon + ": file not found: " + audiofile, file=sys.stderr)
+        if audiofiles:
+            e_map[ephon] = audiofiles
 
 
 e_map[" "] = ["silence.mp3"]
@@ -56,7 +62,7 @@ while i < len(phonetic):
         i = i + 1
     else:
         if not args.missing_phonemes_print:
-            print(phonetic[i] + ": not found", file=sys.stderr)
+            print(phonetic[i] + ": not defined. skipping", file=sys.stderr)
         i = i + 1
 
 # Assembly of ffmpeg command
