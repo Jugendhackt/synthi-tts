@@ -1,6 +1,7 @@
 # THAT'S ME!
 
 Deine Stimme digitalisieren und für dich sprechen lassen!
+![made at Jugend Hackt 2019 Berlin](http://jhbadge.com/?evt=ber&year=2017))
 
 ## Vorhaben
 
