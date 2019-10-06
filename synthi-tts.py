@@ -25,6 +25,7 @@ print(phonetic)
 
 # create e_map from espeak-gentle translation
 e_map = {}
+# TODO: neue ordnerstrktur benutzen
 
 with open("espeak-to-gentle", encoding="utf-8") as f:
     for line in f.readlines():
@@ -42,7 +43,6 @@ with open("espeak-to-gentle", encoding="utf-8") as f:
 
 e_map[" "] = ["silence.mp3"]
 #print(e_map)
-
 
 # create list of files from string
 files = []
