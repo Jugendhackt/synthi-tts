@@ -22,7 +22,7 @@ def create_ffmpeg_command(folder_name, word, phone_index):
     command = command + ".mp3 -vn -acodec mp3 -ss " + seconds_to_ffmpeg_format(phone_offset)
     command = command + " -t " + seconds_to_ffmpeg_format(word['phones'][i]['duration'])
 
-    file_name = folder_name + "/" + word['phones'][phone_index]['phone'].replace("_B","").replace("_I","").replace("_E","") + "/"
+    file_name = folder_name + "/" + word['phones'][phone_index]['phone'][:-2] + "/"
 
     try:
         os.mkdir(file_name)
@@ -73,9 +73,9 @@ for word in data['words']:
     if word['case'] != "not-found-in-audio":
         # Iterates phonemes
         for i in range(len(word["phones"])):
-            try:
+            if word['phones'][i]['phone'] in phoneme_map:
                 phoneme_map[word['phones'][i]['phone']].append(word['phones'][i]['duration'])
-            except KeyError:
+            else:
                 phoneme_map[word['phones'][i]['phone']] = [word['phones'][i]['duration']]
 
  #iterates over the phonomes, and replaces the list of all durations with the average duration               
