@@ -45,16 +45,25 @@ def create_ffmpeg_command(folder_name, word, phone_index):
 
 # Get the name of the gentle output file from CLI
 jsonfile = sys.argv[1]
-if not jsonfile.endswith("json"):
-    jsonfile = jsonfile + ".json"
+
+if not os.path.exists(jsonfile):
+    print("file " + jsonfile + " doesn't exist! aborting...", file=sys.stderr)
+    sys.exit()
+
+folder = str(sys.argv[2]) if len(sys.argv) > 2 else ""
+if not folder.strip():
+    folder = str(os.path.splitext(jsonfile)[0])
+print("writing to folder " + folder)
+
 with open(jsonfile) as json_file:
     data = json.load(json_file)
 
 try:
-    os.mkdir(jsonfile.replace('.json',''))
+    os.mkdir(folder)
 except FileExistsError:
     #the folder already existsif not jsonfile.endswith("json"):
     pass
+
 
 #decide which phoneme to use
 # Loop through each word of the transcript
