@@ -30,7 +30,9 @@ for word in data['words']:
         # Iterates phonemes
         for i in range(len(word["phones"])):
             # Check whether phoneme already exists as saved file
-            if not os.path.isfile(str(jsonfile.replace(".json", "")) + "/" + word['phones'][i]['phone'].replace("_B","").replace("_I","").replace("_E","") + ".mp3"):
+            if os.path.isfile(str(jsonfile.replace(".json", "")) + "/" + word['phones'][i]['phone'].replace("_B","").replace("_I","").replace("_E","") + ".mp3"):
+                print("skipping " + word['phones'][i]['phone'].split("_", 1)[0] + " because it exists")
+            else:
                 # assemble ffmpeg command
                 command = "ffmpeg -i "
                 command = command + str(jsonfile.replace(".json", "")) 
@@ -49,9 +51,11 @@ for word in data['words']:
 
                 # Prefer inner phonemes
                 if "_I" in word['phones'][i]['phone']:
-                    command = command + " -n -loglevel panic"
+                    print("overriding " + word['phones'][i]['phone'])
+                    command = command + " -n -loglevel warning"
                 else:
-                    command = command + " -y -loglevel panic"
+                    print("processing " + word['phones'][i]['phone'])
+                    command = command + " -y -loglevel warning"
                 # Execute ffmpeg
                 os.system(command)
     
