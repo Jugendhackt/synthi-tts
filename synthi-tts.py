@@ -31,7 +31,7 @@ with open("espeak-to-gentle", encoding="utf-8") as f:
     for line in f.readlines():
         ephon, gphon = line.split("=")
         gphon = gphon.split(" ")
-        audiofiles = [(str(args.folder) + '/' + a.strip() + ".mp3") for a in gphon]
+        audiofiles = [(str(args.folder) + '/' + a.strip() + "/1.mp3") for a in gphon]
         for audiofile in audiofiles:
             if not os.path.exists(audiofile):
                 audiofiles.remove(audiofile)
