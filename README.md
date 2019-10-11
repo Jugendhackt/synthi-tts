@@ -4,6 +4,10 @@ Digitize your own voice to have it speak for you! Fully automated!
 
 ![Made at Jugend Hackt 2019 Berlin](http://jhbadge.com/?evt=ber&year=2019)
 
+**Notice by Niklas:** I've taken this prototype and [re-implemented it to make everything sound a lot better!](https://github.com/nkreer/synthi-tts-revamped) I am not sure as to whether development in this repository will continue, but you can still use it if you'd like. I would like to thank everyone who helped me bring this idea to life, especially Moritz and Jackob who were responsible for the code in this repo!
+
+---
+
 ## Creating the voice model
 
 - Speak a little! [audio.mp3]
